@@ -91,19 +91,38 @@
  # services.xserver.desktopManager.gnome.enable = true;
 
   services.xserver = {
-    enable = true;
-    displayManager.defaultSession = "none+i3";
-    desktopManager.xterm.enable = false;
+    enable = true;   
+    desktopManager = {
+      xterm.enable = false;
+      xfce = {
+        enable = true;
+        noDesktop = true;
+        enableXfwm = false;
+      };
+    };
+    displayManager.defaultSession = "xfce+i3";
     windowManager.i3.enable = true;
-    displayManager.lightdm.enable = true;
     layout = "us";
     xkbVariant = "intl";
     libinput.enable = true;
+    xrandrHeads = [
+      { 
+        output = "eDP-1";
+        primary = true; 
+        monitorConfig = ''Option "DPI" "144 x 144"''; 
+      }
+    ];
   };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  # Video enable
+  services.picom = { 
+    enable = true;
+    backend = "glx";
+    vSync = true;
+  };
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;

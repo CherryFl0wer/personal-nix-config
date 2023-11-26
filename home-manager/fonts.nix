@@ -4,8 +4,7 @@
   home.packages = with pkgs; [
       terminus_font
       fira-code
-      dejavu_fonts
-      (nerdfonts.override {fonts = ["FiraCode"];})
+      (nerdfonts.override {fonts = ["FiraCode" "Noto"];})
   ];
 
   fonts.fontconfig.enable = true;

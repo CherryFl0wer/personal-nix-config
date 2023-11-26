@@ -32,7 +32,7 @@
     programs.alacritty = {
       enable = true;
       settings = {
-        font.size = 7.0;
+        font.size = 13.0;
         font.normal.family = "FiraCode";
         
         env = {

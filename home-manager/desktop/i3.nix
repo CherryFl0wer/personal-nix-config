@@ -19,7 +19,7 @@ in {
           "DejaVu Sans"
           "DejaVu Serif"
         ];
-        size = 14.0;
+        size = 16.0;
       };
       
       terminal = "alacritty";
@@ -63,7 +63,7 @@ in {
 
           fonts = {
             names = ["FiraCode"];
-            size = 14.0;
+            size = 18.0;
           };
         }
       ];
