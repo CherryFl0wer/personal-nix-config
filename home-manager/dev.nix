@@ -5,6 +5,8 @@
 	bottom 
 	tree
 	bat
+  gum
+
 	# env
 	vscode
 

@@ -3,10 +3,6 @@
 let 
   mod = "Mod4";
 in {
-  xsession.initExtra = ''
-  xrandr --output eDP-1 --mode "3840x2400" --rate 60.00 --scale 0.8x0.8  
-  ''; 
-
   xsession.windowManager.i3 = {
     enable = true;
     package = pkgs.i3-gaps;

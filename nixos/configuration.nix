@@ -7,13 +7,14 @@
   config,
   pkgs,
   ...
-}: {
+}:  {
   # You can import other NixOS modules here
   imports = [
     # If you want to use modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
     # inputs.hardware.nixosModules.common-ssd
     ./hardware-configuration.nix
+    #./xfce.nix
   ];
 
   nixpkgs = {
@@ -120,7 +121,6 @@
   # Video enable
   services.picom = { 
     enable = true;
-    backend = "glx";
     vSync = true;
   };
   # Enable sound with pipewire.

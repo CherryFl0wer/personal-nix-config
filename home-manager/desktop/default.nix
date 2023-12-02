@@ -7,7 +7,6 @@
 
     imports = [
         ./i3.nix
-        ./xdg.nix
     ];
 
 }
