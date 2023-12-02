@@ -19,7 +19,7 @@ in {
           "DejaVu Sans"
           "DejaVu Serif"
         ];
-        size = 16.0;
+        size = 18.0;
       };
       
       terminal = "alacritty";
@@ -36,18 +36,47 @@ in {
         # Focus
         "${mod}+j" = "focus left";
         "${mod}+k" = "focus down";
-        "${mod}+l" = "focus up";
-        "${mod}+semicolon" = "focus right";
+        "${mod}+i" = "focus up";
+        "${mod}+l" = "focus right";
 
         # Move
         "${mod}+Shift+j" = "move left";
         "${mod}+Shift+k" = "move down";
-        "${mod}+Shift+l" = "move up";
-        "${mod}+Shift+semicolon" = "move right";
+        "${mod}+Shift+i" = "move up";
+        "${mod}+Shift+l" = "move right";
+
+        # Resize
+        "${mod}+Control+Left" = "resize shrink width 10 px or 10 ppt";
+        "${mod}+Control+Right" = "resize grow width 10 px or 10 ppt";
+        "${mod}+Control+Down" = "resize shrink height 10 px or 10 ppt";
+        "${mod}+Control+Up" = "resize grow height 10 px or 10 ppt";
 
         # My multi monitor setup
         "${mod}+m" = "move workspace to output DP-2";
         "${mod}+Shift+m" = "move workspace to output DP-5";
+
+        "XF86AudioLowerVolume" =
+          "exec --no-startup-id pactl set-sink-volume 0 -5%"; # decrease sound volume
+
+        "XF86AudioMute" =
+          "exec --no-startup-id pactl set-sink-mute 0 toggle"; # mute sound
+
+        "XF86AudioNext" = "exec playerctl next";
+
+        "XF86AudioPlay" = "exec playerctl play-pause";
+
+        "XF86AudioPrev" = "exec playerctl previous";
+
+        "XF86AudioRaiseVolume" =
+          "exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume";
+
+        "XF86AudioStop" = "exec playerctl stop";
+
+        "XF86MonBrightnessDown" =
+          "exec xbacklight -dec 20"; # decrease screen brightness
+
+        "XF86MonBrightnessUp" =
+          "exec xbacklight -inc 20"; # increase screen brightness
       };
 
       focus = {
@@ -58,8 +87,13 @@ in {
       startup = [
         {
           command =
-            "${pkgs.feh}/bin/feh --bg-fill ./wallpapers/4k-forest-01.jpg";
+            "${pkgs.feh}/bin/feh --bg-fill /home/cherryflower/.config/home-manager/wallpapers/4k-forest-01.jpg";
           always = true;
+          notification = false;
+        }
+        {
+          command = "xfce4-volumed-pulse &";
+          always = false;
           notification = false;
         }
       ];
@@ -76,7 +110,7 @@ in {
 
           fonts = {
             names = ["FiraCode"];
-            size = 18.0;
+            size = 16.0;
           };
         }
       ];
