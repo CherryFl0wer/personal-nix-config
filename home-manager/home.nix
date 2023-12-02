@@ -41,6 +41,9 @@
   home = {
     username = lib.mkDefault "cherryflower";
     homeDirectory = lib.mkDefault "/home/${config.home.username}";
+    file = {
+      ".config/starship.toml".source = ./starship-config.toml;
+    };
   };
   
   # Enable home-manager and git

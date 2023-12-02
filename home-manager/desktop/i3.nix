@@ -5,9 +5,13 @@ let
 in {
   xsession.windowManager.i3 = {
     enable = true;
+
     package = pkgs.i3-gaps;
+
     config = {
+
       modifier = mod;
+
       fonts = {
         names = [
           "FiraCode"
@@ -46,6 +50,19 @@ in {
         "${mod}+Shift+m" = "move workspace to output DP-5";
       };
 
+      focus = {
+        followMouse = true;
+        wrapping = "yes";
+      };
+
+      startup = [
+        {
+          command =
+            "${pkgs.feh}/bin/feh --bg-fill ./wallpapers/4k-forest-01.jpg";
+          always = true;
+          notification = false;
+        }
+      ];
 
       gaps = {
         inner = 10;

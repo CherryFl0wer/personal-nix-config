@@ -64,7 +64,6 @@ in {
     programs.starship = {
       enable = true;
       enableZshIntegration = true;
-      extraConfig = ''${starshipTomlSrc}'';
     };
 
 
