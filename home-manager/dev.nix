@@ -6,6 +6,7 @@
     tree
     bat
     gum
+    gcc
 
     # env
     vscode
