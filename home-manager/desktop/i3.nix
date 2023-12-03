@@ -19,7 +19,7 @@ in {
           "DejaVu Sans"
           "DejaVu Serif"
         ];
-        size = 18.0;
+        size = 21.0;
       };
       
       terminal = "alacritty";
@@ -52,8 +52,8 @@ in {
         "${mod}+Control+Up" = "resize grow height 10 px or 10 ppt";
 
         # My multi monitor setup
-        "${mod}+m" = "move workspace to output DP-2";
-        "${mod}+Shift+m" = "move workspace to output DP-5";
+        #"${mod}+m" = "move workspace to output DP-2";
+        #"${mod}+Shift+m" = "move workspace to output DP-5";
 
         "XF86AudioLowerVolume" =
           "exec --no-startup-id pactl set-sink-volume 0 -5%"; # decrease sound volume
@@ -87,7 +87,7 @@ in {
       startup = [
         {
           command =
-            "${pkgs.feh}/bin/feh --bg-fill /home/cherryflower/.config/home-manager/wallpapers/4k-forest-01.jpg";
+            "${pkgs.feh}/bin/feh --bg-fill /home/cherryflower/.config/home-manager/wallpapers/4k-snow-trees.jpg";
           always = true;
           notification = false;
         }

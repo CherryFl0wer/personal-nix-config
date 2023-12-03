@@ -1,24 +1,24 @@
  { config, pkgs, ... }: {
   home.packages = with pkgs; [
   	# base 
-	ripgrep
-	bottom 
-	tree
-	bat
-  gum
+    ripgrep
+    bottom 
+    tree
+    bat
+    gum
 
-	# env
-	vscode
+    # env
+    vscode
+    jetbrains.rust-rover
+    
+    # go 
+    go
 
-	# go 
-	go
+    # rust 
+    rustup
 
-	# rust 
-	cargo
-	rustc
-
-	# lib
-	pkg-config
+    # lib
+    pkg-config
     dbus
     openssl_3
     glib
