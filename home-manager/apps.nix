@@ -4,6 +4,7 @@
     ];
 
     home.packages = with pkgs; [
+        firefox
         spotify
         spotify-tui
         feh

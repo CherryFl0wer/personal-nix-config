@@ -1,5 +1,6 @@
 { config, pkgs, ... } : {
     programs.firefox = {
+        enable = true;
         profiles.default = {
             id = 0;
             name = "default";
@@ -42,87 +43,67 @@
                 "svg.context-properties.content.enabled" = true; # Sidebery styling
             };
             userChrome = ''
-            :root {
-              --focus-outline-color: ${config.theme.colors.base04} !important;
-              --toolbar-color: ${config.theme.colors.base07} !important;
-              --tab-min-height: 30px !important;
-            }
-            /* Background of tab bar */
-            .toolbar-items {
-              background-color: ${config.theme.colors.base00} !important;
-            }
-            /* Extra tab bar sides on macOS */
-            .titlebar-spacer {
-              background-color: ${config.theme.colors.base00} !important;
-            }
-            .titlebar-buttonbox-container {
-              background-color: ${config.theme.colors.base00} !important;
-            }
-            #tabbrowser-tabs {
-              border-inline-start: 0 !important;
-            }
-            /* Private Browsing indicator on macOS */
-            #private-browsing-indicator-with-label {
-              background-color: ${config.theme.colors.base00} !important;
-              margin-inline: 0 !important;
-              padding-inline: 7px;
-            }
-            /* Tabs themselves */
-            .tabbrowser-tab .tab-stack {
-              border-radius: 5px 5px 0 0;
-              overflow: hidden;
-              background-color: ${config.theme.colors.base00};
-              color: ${config.theme.colors.base06} !important;
-            }
-            .tab-content {
-              border-bottom: 2px solid color-mix(in srgb, var(--identity-tab-color) 40%, transparent);
-              border-radius: 5px 5px 0 0;
-              background-color: ${config.theme.colors.base00};
-              color: ${config.theme.colors.base06} !important;
-            }
-            .tab-content[selected] {
-              border-bottom: 2px solid color-mix(in srgb, var(--identity-tab-color) 25%, transparent);
-              background-color: ${config.theme.colors.base01} !important;
-              color: ${config.theme.colors.base07} !important;
-            }
-            /* Below tab bar */
-            #nav-bar {
-              background: ${config.theme.colors.base01} !important;
-            }
-            /* URL bar in nav bar */
-            #urlbar[focused=true] {
-              color: ${config.theme.colors.base07} !important;
-              background: ${config.theme.colors.base02} !important;
-              caret-color: ${config.theme.colors.base05} !important;
-            }
-            #urlbar:not([focused=true]) {
-              color: ${config.theme.colors.base04} !important;
-              background: ${config.theme.colors.base02} !important;
-            }
-            #urlbar ::-moz-selection {
-              color: ${config.theme.colors.base07} !important;
-              background: ${config.theme.colors.base02} !important;
-            }
-            #urlbar-input-container {
-              border: 1px solid ${config.theme.colors.base01} !important;
-            }
-            #urlbar-background {
-              background: ${config.theme.colors.base01} !important;
-            }
-            /* Text in URL bar */
-            #urlbar-input, #urlbar-scheme, .searchbar-textbox {
-              color: ${config.theme.colors.base07} !important;
-            }
-            '';
-            userContent = ''
-            @-moz-document url-prefix(about:blank) {
-              * {
-                background-color:${config.theme.colors.base01} !important;
-              }
-            }
+            @-moz-document url(chrome://browser/content/browser.xhtml) {
+          /* tabs on bottom of window */
+          #main-window body { flex-direction: column-reverse !important; }
+          #navigator-toolbox { flex-direction: column-reverse !important; }
+          #urlbar {
+            top: unset !important;
+            bottom: calc((var(--urlbar-toolbar-height) - var(--urlbar-height)) / 2) !important;
+            box-shadow: none !important;
+            display: flex !important;
+            flex-direction: column !important;
+          }
+          #urlbar-input-container {
+            order: 2;
+          }
+          #urlbar > .urlbarView {
+            order: 1;
+            border-bottom: 1px solid #666;
+          }
+          #urlbar-results {
+            display: flex;
+            flex-direction: column-reverse;
+          }
+          .search-one-offs { display: none !important; }
+          .tab-background { border-top: none !important; }
+          #navigator-toolbox::after { border: none; }
+          #TabsToolbar .tabbrowser-arrowscrollbox,
+          #tabbrowser-tabs, .tab-stack { min-height: 28px !important; }
+          .tabbrowser-tab { font-size: 80%; }
+          .tab-content { padding: 5px 5px; }
+          .tab-close-button .toolbarbutton-icon { width: 12px !important; height: 12px !important; }
+          toolbox[inFullscreen=true] { display: none; }
+          /*
+          * the following makes it so that the on-click panels in the nav-bar
+          * extend upwards, not downwards. some of them are in the #mainPopupSet
+          * (hamburger + unified extensions), and the rest are in
+          * #navigator-toolbox. They all end up with an incorrectly-measured
+          * max-height (based on the distance to the _bottom_ of the screen), so
+          * we correct that. The ones in #navigator-toolbox then adjust their
+          * positioning automatically, so we can just set max-height. The ones
+          * in #mainPopupSet do _not_, and so we need to give them a
+          * negative margin-top to offset them *and* a fixed height so their
+          * bottoms align with the nav-bar. We also calc to ensure they don't
+          * end up overlapping with the nav-bar itself. The last bit around
+          * cui-widget-panelview is needed because "new"-style panels (those
+          * using "unified" panels) don't get flex by default, which results in
+          * them being the wrong height.
+          *
+          * Oh, yeah, and the popup-notification-panel (like biometrics prompts)
+          * of course follows different rules again, and needs its own special
+          * rule.
+          */
+          #mainPopupSet panel.panel-no-padding { margin-top: calc(-50vh + 40px) !important; }
+          #mainPopupSet .panel-viewstack, #mainPopupSet popupnotification { max-height: 50vh !important; height: 50vh; }
+          #mainPopupSet panel.panel-no-padding.popup-notification-panel { margin-top: calc(-50vh - 35px) !important; }	
+          #navigator-toolbox .panel-viewstack { max-height: 75vh !important; }
+          panelview.cui-widget-panelview { flex: 1; }
+          panelview.cui-widget-panelview > vbox { flex: 1; min-height: 50vh; }
+        }
             '';
 
-          extraConfig = "";
+            extraConfig = "";
         };
     };
 }
