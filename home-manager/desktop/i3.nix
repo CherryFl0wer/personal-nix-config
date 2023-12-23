@@ -56,19 +56,19 @@ in {
         #"${mod}+Shift+m" = "move workspace to output DP-5";
 
         "XF86AudioLowerVolume" =
-          "exec --no-startup-id pactl set-sink-volume 0 -5%"; # decrease sound volume
+          "exec --no-startup-id pactl -- set-sink-volume 0 -30%"; # decrease sound volume
 
+        "XF86AudioRaiseVolume" = 
+          "exec --no-startup-id pactl -- set-sink-volume 0 +30%";
+          
         "XF86AudioMute" =
-          "exec --no-startup-id pactl set-sink-mute 0 toggle"; # mute sound
+          "exec --no-startup-id pactl -- set-sink-mute 0 toggle"; # mute sound
 
         "XF86AudioNext" = "exec playerctl next";
 
         "XF86AudioPlay" = "exec playerctl play-pause";
 
         "XF86AudioPrev" = "exec playerctl previous";
-
-        "XF86AudioRaiseVolume" =
-          "exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume";
 
         "XF86AudioStop" = "exec playerctl stop";
 

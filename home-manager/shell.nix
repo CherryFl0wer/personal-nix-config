@@ -28,7 +28,8 @@ in {
           historySubstringSearch.enable = true;
           shellAliases = {
               gs = "git status";
-              gl = "git log";
+              gl = "git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
+              dev = "cd ~/Code/";
           };
     };
     
@@ -81,5 +82,4 @@ in {
         drun-display-format = "{name}";
     };
   };
-
 }
