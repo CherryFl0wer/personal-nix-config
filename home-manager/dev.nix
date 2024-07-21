@@ -10,7 +10,9 @@
 
     # env
     vscode
-    jetbrains.rust-rover
+    jetbrains-toolbox
+    docker   
+    docker-compose
     
     # go 
     go
@@ -18,6 +20,10 @@
     # rust 
     rustup
 
+    # tools
+    redis
+    postgresql_16
+    
     # lib
     pkg-config
     dbus

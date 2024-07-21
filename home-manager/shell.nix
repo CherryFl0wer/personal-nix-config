@@ -37,7 +37,7 @@ in {
     programs.alacritty = {
       enable = true;
       settings = {
-        font.size = 14.0;
+        font.size = 16.0;
         font.normal.family = "FiraCode";
         
         env = {
@@ -54,9 +54,8 @@ in {
 
         live_config_reload = true;
 
-        # NixOS 22.05
         window = {
-          opacity = 0.75;
+          opacity = 0.80;
         };
       };
     };

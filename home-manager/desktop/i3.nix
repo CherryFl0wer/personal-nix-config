@@ -29,7 +29,7 @@ in {
         "${mod}+Return" = "exec ${pkgs.alacritty}/bin/alacritty";
         "${mod}+p" = "exec ${pkgs.dmenu}/bin/dmenu_run";
         "${mod}+x" = "exec sh -c '${pkgs.maim}/bin/maim -s | xclip -selection clipboard -t image/png'";
-        "${mod}+Shift+x" = "exec sh -c '${pkgs.i3lock}/bin/i3lock -c 222222 & sleep 5 && xset dpms force of'";
+        "${mod}+Shift+x" = "exec xflock4";
         "${mod}+w" = "exec ${pkgs.rofi}/bin/rofi -show window -show-icons";
         "${mod}+s" = "exec ${pkgs.rofi}/bin/rofi -show ssh -show-icons";
 

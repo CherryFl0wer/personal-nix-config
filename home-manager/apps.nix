@@ -8,5 +8,7 @@
         spotify
         spotify-tui
         feh
+        wluma
+        audacity
     ];
 }
